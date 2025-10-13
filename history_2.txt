@@ -1,0 +1,35 @@
+User request:
+
+Етап 2. Генерація CMakeLists.txt 
+1. Створити файл: У корені репозиторію створіть файл з назвою 
+CMakeLists.txt. 
+2. Перевірити його працездатність. 
+3. Закомітити зміни у feature/develop/2 і запушити. 
+
+
+LLM Responce:
+
+Read main.cpp
+
+Created CMakeLists.txt
+
+cmake -S . -B build
+
+Remove-Item -Recurse -Force build
+
+git status -sb
+Auto approved by rule git status
+
+git add CMakeLists.txt
+
+git commit -m "Add CMake build configuration"
+
+git push origin feature/develop/2
+CMake Setup
+
+Added CMakeLists.txt configuring the project as a C++17 executable from main.cpp.
+Confirmed the file works by running cmake -S . -B build, then removed the temporary build directory.
+Committed Add CMake build configuration and pushed to feature/develop/2.
+Verification: cmake -S . -B build
+
+Possible next step: 1. Add build to .gitignore if you plan to regenerate it locally.
