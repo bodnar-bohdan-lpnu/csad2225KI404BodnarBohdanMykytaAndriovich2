@@ -47,6 +47,7 @@ target_link_libraries(unit_tests
     PRIVATE
         math_operations
         GTest::gtest
+        GTest::gtest_main
         Threads::Threads
 )
 
