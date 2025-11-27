@@ -4,11 +4,14 @@
 set -o pipefail
 
 BUILD_DIR="build"
+CONFIG="${CONFIG:-Debug}"
 
 mkdir -p "$BUILD_DIR" || exit 1
 cd "$BUILD_DIR" || exit 1
 
-if cmake .. && cmake --build . && ctest; then
+if cmake -DCMAKE_BUILD_TYPE="$CONFIG" .. \
+  && cmake --build . --config "$CONFIG" \
+  && ctest -C "$CONFIG" --output-on-failure; then
   echo "Build and tests succeeded."
   exit 0
 else
