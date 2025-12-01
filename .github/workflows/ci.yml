@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "*develop*"
+      - "*master*"
+  pull_request:
+    branches:
+      - "*develop*"
+      - "*master*"
+
+jobs:
+  cross_build:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install CMake
+        uses: jwlawson/actions-setup-cmake@v1
+
+      - name: Make ci.sh executable
+        if: runner.os != 'Windows'
+        run: chmod +x ci.sh
+        shell: bash
+
+      - name: Run CI script (Unix)
+        if: runner.os != 'Windows'
+        run: ./ci.sh
+        shell: bash
+
+      - name: Run CI script (Windows)
+        if: runner.os == 'Windows'
+        run: ./ci.bat
+        shell: cmd
+
+      - name: Build success message
+        run: echo "✅ Build succeeded"
+
+      - name: Deploy artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output-${{ matrix.os }}
+          path: build

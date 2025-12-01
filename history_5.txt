@@ -1,0 +1,19 @@
+1. Створення структури Actions: У репозиторії створіть каталог 
+.github/workflows/. У ньому створіть файл, наприклад, ci.yml. 
+2. Використання Copilot для YML: У файлі ci.yml використовуйте Copilot для 
+генерації робочого процесу (workflow) з наступними вимогами: 
+○ Trigger: Запускати акцію при push або pull request у гілку, що містить в 
+назві  develop чи master . 
+○ Job: Створити одну Job (наприклад, cross_build). 
+○ Strategy: Використати матрицю (strategy: matrix) для запуску білду 
+на трьох ОС: 
+■ runs-on: ubuntu-latest (Linux) 
+■ runs-on: windows-latest (Windows) 
+■ runs-on: macos-latest (macOS) 
+○ Steps: Кожен білд повинен включати кроки: 
+■ Checkout коду (actions/checkout@v4). 
+■ Встановлення CMake (якщо потрібно). 
+■ Запуск команд конфігурації та білдування (запуск скрипту з Етапу 
+3). 
+■ Deploy. 
+3. Закомітити зміни у feature/develop/5
